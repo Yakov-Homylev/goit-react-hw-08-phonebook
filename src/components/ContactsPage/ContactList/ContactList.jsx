@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ContactItem from "./ContactItem";
 import { List, Notification } from "./ContactList.styled";
-import { useGetContactsQuery } from "../../redux/contacts/contacts";
+import { useGetContactsQuery } from "redux/contacts/contacts";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../Loader/Loader";
-import { filter } from "../../redux/filter/filter-action";
+import Loader from "../../Loader/Loader";
+import { filter } from "redux/filter/filter-action";
 
 export default function ContactList() {
   const { data, isLoading } = useGetContactsQuery();
