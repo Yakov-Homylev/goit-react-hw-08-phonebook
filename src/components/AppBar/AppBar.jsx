@@ -1,7 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import UserMenu from "components/UserMenu/UserMenu";
-import { Navigation, NavigationList, AuthorizationBox } from "./AppBar.styled";
+import {
+  Navigation,
+  NavigationList,
+  NavigationLink,
+  AuthorizationBox,
+} from "./AppBar.styled";
 import { useSelector } from "react-redux";
 import { getUserLogin } from "redux/authorization/authorization-selectors";
 
@@ -11,15 +15,22 @@ function AppBar() {
   return (
     <Navigation>
       <NavigationList>
-        <NavLink to="contacts">Contacts</NavLink>
-
         {isLogin ? (
-          <UserMenu />
+          <>
+            <NavigationLink to="contacts">Contacts</NavigationLink>
+            <UserMenu />
+          </>
         ) : (
-          <AuthorizationBox>
-            <NavLink to="register">Registration</NavLink>
-            <NavLink to="login">Login</NavLink>
-          </AuthorizationBox>
+          <>
+            <NavigationLink disabled to="contacts">
+              Contacts
+            </NavigationLink>
+
+            <AuthorizationBox>
+              <NavigationLink to="register">Registration</NavigationLink>
+              <NavigationLink to="login">Login</NavigationLink>
+            </AuthorizationBox>
+          </>
         )}
       </NavigationList>
     </Navigation>

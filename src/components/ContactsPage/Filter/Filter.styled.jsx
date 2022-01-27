@@ -9,5 +9,6 @@ export const Title = styled.h3`
   margin-bottom: 8px;
 `;
 export const FilterInput = styled.input`
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
 `;

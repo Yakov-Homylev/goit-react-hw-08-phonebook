@@ -32,23 +32,23 @@ export default function ContactList() {
   }, [clearFilterValue, dispatch]);
 
   return (
-    <List>
-      {isLoading && <Loader />}
-      {isContactsNotEmpty ? (
-        visibleContacts.map(el => {
-          return (
-            <ContactItem
-              key={el.id}
-              id={el.id}
-              name={el.name}
-              number={el.phone}
-              setDeleted={setDeleted}
-            />
-          );
-        })
-      ) : (
-        <Notification>This list is empty</Notification>
-      )}
-    </List>
+    <>
+      <List>
+        {isLoading && <Loader />}
+        {isContactsNotEmpty &&
+          visibleContacts.map(el => {
+            return (
+              <ContactItem
+                key={el.id}
+                id={el.id}
+                name={el.name}
+                number={el.number}
+                setDeleted={setDeleted}
+              />
+            );
+          })}
+      </List>
+      {!isContactsNotEmpty && <Notification>This list is empty</Notification>}
+    </>
   );
 }

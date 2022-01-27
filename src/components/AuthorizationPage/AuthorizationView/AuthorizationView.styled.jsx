@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
 export const FormWrapper = styled.form`
   justify-content: center;
   align-items: center;

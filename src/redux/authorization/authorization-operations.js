@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
-const userToken = {
+export const userToken = {
   logIn(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
@@ -14,30 +14,41 @@ const userToken = {
 
 export const userRegistration = createAsyncThunk(
   "user/registration",
-  async user => {
+  async (user, thunkAPI) => {
     try {
       const { data } = await axios.post("/users/signup", user);
       userToken.logIn(data.token);
       return data;
-    } catch (error) {}
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.status);
+    }
   }
 );
 
-export const userLogin = createAsyncThunk("user/login", async user => {
-  try {
-    const { data } = await axios.post("/users/login", user);
-    userToken.logIn(data.token);
-    console.log(data);
-    return data;
-  } catch (error) {}
-});
+export const userLogin = createAsyncThunk(
+  "user/login",
+  async (user, thunkAPI) => {
+    try {
+      const { data } = await axios.post("/users/login", user);
+      userToken.logIn(data.token);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.status);
+    }
+  }
+);
 
-export const userLogout = createAsyncThunk("user/logout", async () => {
-  try {
-    await axios.post("/users/logout");
-    userToken.logOut();
-  } catch (error) {}
-});
+export const userLogout = createAsyncThunk(
+  "user/logout",
+  async (_, thunkAPI) => {
+    try {
+      await axios.post("/users/logout");
+      userToken.logOut();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.status);
+    }
+  }
+);
 
 export const userRefresh = createAsyncThunk(
   "user/refresh",
@@ -54,6 +65,8 @@ export const userRefresh = createAsyncThunk(
     try {
       const { data } = await axios.get("/users/current");
       return { user: data, token };
-    } catch (error) {}
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.status);
+    }
   }
 );

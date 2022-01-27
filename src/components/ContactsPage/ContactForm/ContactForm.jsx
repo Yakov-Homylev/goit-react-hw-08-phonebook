@@ -15,14 +15,14 @@ function ContactForm() {
 
     const newContact = {
       name: e.target.name.value,
-      phone: e.target.number.value,
+      number: e.target.number.value,
     };
 
     const isNameIncludeInArray = data.find(
       contact => contact.name === newContact.name
     );
     const isNumberIncludeInArray = data.find(
-      contact => contact.phone === newContact.phone
+      contact => contact.number === newContact.number
     );
 
     if (isNameIncludeInArray) {

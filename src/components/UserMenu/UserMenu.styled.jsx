@@ -9,8 +9,14 @@ export const UserBar = styled.div`
 
 export const LogOutButton = styled.button`
   margin-left: 16px;
-  padding: 4px 8px;
   background-color: transparent;
-  border-radius: 8px;
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 12px;
+  transition: background-color 250ms cubic-bezier(0.47, 0, 0.745, 0.715);
+
+  :hover {
+    background-color: aqua;
+  }
   cursor: pointer;
 `;

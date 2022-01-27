@@ -14,18 +14,19 @@ export const InputName = styled.label`
 `;
 
 export const Input = styled.input`
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
   margin-left: 8px;
 `;
 
 export const AddButoon = styled.button`
-  padding: 4px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
   background-color: transparent;
   transition: background-color 250ms cubic-bezier(0.47, 0, 0.745, 0.715);
   cursor: pointer;
 
   :hover {
-    background-color: skyblue;
+    background-color: aqua;
   }
 `;

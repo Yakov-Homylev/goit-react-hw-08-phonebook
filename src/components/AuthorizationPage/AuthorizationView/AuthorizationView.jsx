@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
+  Wrapper,
   FormWrapper,
   FormInput,
   ErrorMessage,
@@ -30,28 +31,30 @@ function AuthorizationView() {
     resolver: yupResolver(schema),
   });
 
-  const onFormSumbit = data => {
-    console.log(data);
-    dispatch(userLogin(data));
-  };
-
+  const onFormSumbit = data => dispatch(userLogin(data));
   return (
-    <div>
-      <FormWrapper onSubmit={handleSubmit(onFormSumbit)} autoComplete="off">
-        <label>
-          <p>Email</p>
-          <FormInput {...register("email")} />
-          <ErrorMessage>{errors.email?.message}</ErrorMessage>
-        </label>
-        <label>
-          <p>Password</p>
-          <FormInput type="password" {...register("password")} />
-          <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        </label>
-        <FormInput type="submit" />
-      </FormWrapper>
-      {isLogin && <Navigate to="/contacts" />}
-    </div>
+    <Wrapper>
+      {!isLogin ? (
+        <FormWrapper onSubmit={handleSubmit(onFormSumbit)} autoComplete="off">
+          <label>
+            <p>Email</p>
+            <FormInput {...register("email")} />
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          </label>
+          <label>
+            <p>Password</p>
+            <FormInput type="password" {...register("password")} />
+            <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          </label>
+          <FormInput
+            type="submit"
+            style={{ backgroundColor: "transparent", cursor: "pointer" }}
+          />
+        </FormWrapper>
+      ) : (
+        <Navigate replace to="/contacts" />
+      )}
+    </Wrapper>
   );
 }
 

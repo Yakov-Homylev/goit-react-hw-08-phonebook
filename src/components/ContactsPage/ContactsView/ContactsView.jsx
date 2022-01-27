@@ -11,13 +11,18 @@ function ContactsView() {
 
   return (
     <Wrapper>
-      <h1>Phonebook</h1>
-      <ContactForm />
+      {isLogin ? (
+        <>
+          <h1>Phonebook</h1>
+          <ContactForm />
 
-      <h2>Contacts</h2>
-      <Filter title="Find contacts by name" />
-      <ContactList />
-      {!isLogin && <Navigate to="/login" />}
+          <h2>Contacts</h2>
+          <Filter title="Find contacts by name" />
+          <ContactList />
+        </>
+      ) : (
+        <Navigate replace to="/login" />
+      )}
     </Wrapper>
   );
 }
